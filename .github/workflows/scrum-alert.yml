@@ -3,7 +3,7 @@ name: Discord Scrum Bot
 on:
   workflow_dispatch:
   schedule:
-    cron: "57 8 * * *"
+    - cron: "57 8 * * *"
     # Mon ~ Thu: 10AM KST (UTC+9 == 01AM UTC)
     #- cron: "0 1 * * 1-4"
     # Fri: 10AM KST (01AM UTC)
