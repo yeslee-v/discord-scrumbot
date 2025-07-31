@@ -3,28 +3,21 @@ name: Discord Scrum Bot
 on:
   workflow_dispatch:
   schedule:
-    - cron: "37 10 * * *"
     # Mon ~ Thu: 10AM KST (UTC+9 == 01AM UTC)
-    #- cron: "0 1 * * 1-4"
+    - cron: "0 1 * * 1-4"
     # Fri: 10AM KST (01AM UTC)
-    #- cron: "0 1 * * 5"
+    - cron: "0 1 * * 5"
 
 jobs:
   send-scrum-message:
     runs-on: ubuntu-latest
     steps:
-      - name: test sending message
-        uses: tsickert/discord-webhook@v5.3.0
-        with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-          content: "test scrumbot"
-          
       - name: Send Discord Standup Message (Mon–Thu)
         if: ${{ github.event.schedule == '0 1 * * 1-4' }}
         uses: tsickert/discord-webhook@v5.3.0
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
-          content: "오늘 할 일 작성해주세요📝 아자 아자 화이팅!"
+          content: "오늘 할 일 작성해주세요 📝 아자 아자 화이팅!"
 
       - name: Send Discord Friday Message
         if: ${{ github.event.schedule == '0 1 * * 5' }}
@@ -32,5 +25,3 @@ jobs:
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: "금요일 스프린트 지금 시작합니다 🎉"
-
-
